@@ -47,25 +47,27 @@ function getTasks() {
 function addTask(e) {
   if (taskInput.value === "") {
     alert("Didn't add any task!");
+    // break;
+  } else {
+    e.preventDefault();
+    const li = document.createElement("li");
+
+    li.className = "collection-item";
+    li.appendChild(document.createTextNode(taskInput.value));
+    // Create new linkelemnt
+    const link = document.createElement("a");
+    link.className = "delete-item secondary-content";
+    // Add icon html
+    link.innerHTML = '<i class="fa fa-remove"></i>';
+    li.appendChild(link);
+
+    taskList.appendChild(li);
+
+    //Store Task in LocalStorage
+    storeTaskInLocalStorage(taskInput.value);
+
+    taskInput.value = "";
   }
-  e.preventDefault();
-  const li = document.createElement("li");
-
-  li.className = "collection-item";
-  li.appendChild(document.createTextNode(taskInput.value));
-  // Create new linkelemnt
-  const link = document.createElement("a");
-  link.className = "delete-item secondary-content";
-  // Add icon html
-  link.innerHTML = '<i class="fa fa-remove"></i>';
-  li.appendChild(link);
-
-  taskList.appendChild(li);
-
-  //Store Task in LocalStorage
-  storeTaskInLocalStorage(taskInput.value);
-
-  taskInput.value = "";
 }
 
 function storeTaskInLocalStorage(task) {
